@@ -13,3 +13,14 @@ uClient.close()
 
 # parses html
 page_soup = soup(page_html, "html.parser")
+
+containers = page_soup.findAll("tr")
+# use iter and next in order to skip the first tr element as it contains the headers "Question" and "Answer"
+iter_containers = iter(containers)
+next(iter_containers)
+
+for container in iter_containers:
+    question = container.span.text
+    answer = container.strong.text
+    print("Question: ", question)
+    print("Answer: ", answer)
