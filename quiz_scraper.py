@@ -13,6 +13,11 @@ uClient.close()
 
 # parses html
 page_soup = soup(page_html, "html.parser")
+category = page_soup.find("section", {"id":"page-title"}).h1.text
+filename = "animal_quiz_questions.csv"
+f = open(filename, 'w')
+headers = "category, question, answer\n"
+f.write(headers)
 
 containers = page_soup.findAll("tr")
 # use iter and next in order to skip the first tr element as it contains the headers "Question" and "Answer"
@@ -22,5 +27,8 @@ next(iter_containers)
 for container in iter_containers:
     question = container.span.text
     answer = container.strong.text
-    print("Question: ", question)
-    print("Answer: ", answer)
+    f.write(category + "," + question.replace(",", "|") + "," + answer.replace(",", "|") + "\n")
+    # print("Question: ", question)
+    # print("Answer: ", answer)
+
+f.close()
