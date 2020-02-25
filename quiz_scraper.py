@@ -48,3 +48,5 @@ while counter <= total_pages:
     counter += 1
     animal_quiz_url = "https://pubquizquestions.net/questions/animals/page-" + str(counter)
 f.close()
+
+test = "Testing"
